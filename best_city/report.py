@@ -40,5 +40,43 @@ def _section_text(number: int, items: list[Observation]) -> str:
         selected = [item for item in items if item.kind == kind]
         if not selected:
             return "**Não confirmado:** não há anúncios validados para esta seção."
-        return f"Há {len(selected)} anúncio(s) validado(s) no snapshot. A exportação detalhada permanece nos arquivos JSON auditáveis."
+        return _property_table(selected, kind)
     return "**Pendente de síntese:** há dados importados, mas esta versão não afirma conclusões sem cobertura completa das 15 cidades."
+
+
+def _property_table(items: list[Observation], kind: str) -> str:
+    """Render validated listings in the report instead of hiding them in JSON."""
+    price_key = "preco" if kind == "venda" else "aluguel"
+    price_title = "Preço" if kind == "venda" else "Aluguel-base"
+    lines = [
+        f"{len(items)} anúncio(s) validado(s) no snapshot.", "",
+        f"| Cidade | Bairro | Tipo | Quartos | {price_title} | Área | Coleta | Fonte |",
+        "|---|---|---|---:|---:|---:|---|---|",
+    ]
+    for item in sorted(items, key=lambda value: (value.city, value.data[price_key])):
+        data = item.data
+        area = data.get("area_construida", data.get("area", "Não confirmado"))
+        lines.append(
+            f"| {_cell(item.city)} | {_cell(data['bairro'])} | {_cell(data['tipo'])} | "
+            f"{data['quartos']} | {_money(data[price_key])} | {_area(area)} | "
+            f"{_cell(item.collected_at)} | [{_cell(item.source)}]({item.url}) |"
+        )
+    lines += [
+        "",
+        "> Os links apontam para os anúncios consultados. Preço e disponibilidade são um retrato da data de coleta.",
+    ]
+    return "\n".join(lines)
+
+
+def _money(value: object) -> str:
+    if not isinstance(value, (int, float)):
+        return _cell(value)
+    return f"R$ {value:,.2f}".replace(",", "_").replace(".", ",").replace("_", ".")
+
+
+def _area(value: object) -> str:
+    return f"{value} m²" if isinstance(value, (int, float)) else _cell(value)
+
+
+def _cell(value: object) -> str:
+    return str(value).replace("|", "\\|").replace("\n", " ")
