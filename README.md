@@ -1,4 +1,6 @@
-# Best City SP
+# BuscaLar
+=======
+
 
 Agente de pesquisa auditável para comparar cidades do interior de São Paulo para
 moradia familiar. O projeto transforma a pesquisa em etapas independentes
@@ -9,11 +11,13 @@ rastreáveis.
 ## Início rápido
 
 ```bash
-python -m best_city init
-python -m best_city plan
-python -m best_city validate examples/coleta-exemplo.json
-python -m best_city ingest examples/coleta-exemplo.json
-python -m best_city report
+python -m buscalar init
+python -m buscalar plan
+python -m buscalar validate examples/coleta-exemplo.json
+python -m buscalar ingest examples/coleta-exemplo.json
+python -m buscalar report
+=======
+
 ```
 
 `plan` cria, em `reports/`, um plano de pesquisa com prompts específicos para

@@ -2,11 +2,12 @@ import json
 
 import pytest
 
-from best_city.config import REQUIRED_CITIES, WEIGHTS
-from best_city.models import Observation, ValidationError
-from best_city.ranking import weighted_score
-from best_city.report import render_report
-from best_city.storage import AppendOnlyStore
+from buscalar.config import REQUIRED_CITIES, WEIGHTS
+from buscalar.models import Observation, ValidationError
+from buscalar.ranking import weighted_score
+from buscalar.report import render_report
+from buscalar.storage import AppendOnlyStore
+from buscalar.prompts import research_plan
 
 
 def observation(**overrides):
@@ -55,6 +56,13 @@ def test_partial_score_exposes_coverage_instead_of_assuming_zero():
 
 def test_empty_report_contains_every_city_and_no_fabricated_ranking():
     report = render_report([])
+    assert report.startswith("# Relatório BuscaLar")
     assert all(city in report for city in REQUIRED_CITIES)
     assert "Não confirmado" in report
     assert "Parte 14 — Recomendação final" in report
+
+
+def test_research_plan_uses_buscalar_brand():
+    assert research_plan().startswith("# Plano de execução — BuscaLar")
+
+

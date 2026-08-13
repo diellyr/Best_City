@@ -32,7 +32,8 @@ Cada lote é uma lista JSON. Todo registro contém:
   `anuncio_publicado_em`, `status` e `suspeito`.
 - `aluguel`: `bairro`, `tipo`, `aluguel`, `quartos`, `condominio`,
   `iptu_mensal`, `custo_total`, `area`, `vagas`, `status`.
-- `ranking`: nove notas com as chaves descritas em `best_city/config.py`,
+- `ranking`: nove notas com as chaves descritas em `buscalar/config.py`,
+=======
   justificativa e IDs/URLs das evidências.
 
 Valores desconhecidos devem ser a string `Não confirmado`, nunca `0`. Para
