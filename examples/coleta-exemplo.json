@@ -1,0 +1,16 @@
+[
+  {
+    "kind": "aqi",
+    "city": "Jaguariúna",
+    "collected_at": "2026-08-13T12:00:00-03:00",
+    "source": "Fonte demonstrativa — não importar como pesquisa real",
+    "url": "https://example.com/demonstracao-aqi",
+    "confidence": "Baixa confiança",
+    "evidence_type": "fato",
+    "data": {
+      "aqi": "Não confirmado",
+      "pm25": "Não confirmado",
+      "origem": "Não confirmado"
+    }
+  }
+]
