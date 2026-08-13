@@ -64,3 +64,5 @@ def test_empty_report_contains_every_city_and_no_fabricated_ranking():
 
 def test_research_plan_uses_buscalar_brand():
     assert research_plan().startswith("# Plano de execução — BuscaLar")
+
+

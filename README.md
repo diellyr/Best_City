@@ -1,4 +1,6 @@
 # BuscaLar
+=======
+
 
 Agente de pesquisa auditável para comparar cidades do interior de São Paulo para
 moradia familiar. O projeto transforma a pesquisa em etapas independentes
@@ -14,6 +16,8 @@ python -m buscalar plan
 python -m buscalar validate examples/coleta-exemplo.json
 python -m buscalar ingest examples/coleta-exemplo.json
 python -m buscalar report
+=======
+
 ```
 
 `plan` cria, em `reports/`, um plano de pesquisa com prompts específicos para
