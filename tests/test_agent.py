@@ -58,3 +58,11 @@ def test_empty_report_contains_every_city_and_no_fabricated_ranking():
     assert all(city in report for city in REQUIRED_CITIES)
     assert "Não confirmado" in report
     assert "Parte 14 — Recomendação final" in report
+
+
+def test_report_displays_validated_house_details_and_direct_source():
+    report = render_report([observation()])
+
+    assert "| Tatuí | Centro | casa | 3 | R$ 480.000,00 | 120 m² |" in report
+    assert "[Portal](https://example.com/imovel/123)" in report
+    assert "A exportação detalhada permanece" not in report
