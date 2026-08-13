@@ -73,6 +73,8 @@ class Observation:
 
     @property
     def identity(self) -> tuple[Any, ...]:
+        if self.kind == "bairro":
+            return (self.kind, self.city.casefold(), self.collected_at, self.url, str(self.data.get("bairro", "")).casefold())
         if self.kind not in {"venda", "aluguel"}:
             return (self.kind, self.city.casefold(), self.collected_at, self.url)
         value = self.data.get("preco", self.data.get("aluguel"))
